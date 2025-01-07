@@ -1,0 +1,75 @@
+@use "../helpers" as *;
+
+.custom-select {
+  position: relative;
+  cursor: pointer;
+
+  &.is-expanded {
+    .custom-select__options {
+      scale: 1;
+      @include show;
+    }
+
+    .custom-select__title {
+      &::after {
+        rotate: 180deg;
+      }
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    column-gap: rem(15);
+    padding: rem(20);
+    background-color: var(--color-light);
+    font-size: rem(16);
+    min-width: rem(200);
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-duration);
+
+    @include hover {
+      background-color: var(--color-gray-light);
+    }
+
+    &::after {
+      content: "";
+      transition: rotate var(--transition-duration);
+      width: rem(24);
+      height: rem(24);
+      background: url("../../icons/arrow-down-icon.svg") center / contain no-repeat;
+    }
+  }
+
+  &__options {
+    display: grid;
+    position: absolute;
+    top: calc(100% + #{rem(5)});
+    left: 0;
+    font-weight: 500;
+    font-size: rem(16);
+    width: 100%;
+    row-gap: rem(10);
+    background-color: var(--color-light);
+    box-shadow: var(--shadow);
+    padding: rem(20) rem(10);
+    border-radius: var(--border-radius);
+    z-index: 10;
+    scale: 0;
+    transform-origin: top;
+
+    transition-duration: var(--transition-duration);
+
+    @include hide;
+  }
+
+  &__option {
+    padding-inline: rem(10);
+
+    @include hover {
+      background-color: rgb(219, 217, 217);
+    }
+  }
+}

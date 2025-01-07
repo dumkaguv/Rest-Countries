@@ -1,0 +1,88 @@
+@use "../helpers" as *;
+
+.countries {
+  --padding-content: #{rem(25)};
+
+  &__link {
+    width: 100%;
+
+    @include hover {
+      scale: 1.03;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: rem(80);
+
+    @include laptop {
+      gap: rem(50);
+    }
+
+    @include tablet-l {
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(35);
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile-s {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: stretch;
+    min-width: 100%;
+
+    @include mobile-s {
+      margin-inline: auto;
+    }
+  }
+
+  &__card {
+    background-color: var(--color-light);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    padding-bottom: fluid(20, 40);
+    height: 100%;
+    width: 100%;
+
+    @include hover {
+      background-color: var(--color-gray-light);
+    }
+
+    &-img {
+      object-fit: cover;
+      height: fluid(150, 200);
+      max-width: fluid(250, 300);
+      min-width: 100%;
+      width: 100%;
+      border-radius: inherit;
+    }
+
+    &-title {
+      margin-block: fluid(15, 25);
+      padding-inline: var(--padding-content);
+    }
+
+    &-info {
+      display: grid;
+      row-gap: rem(5);
+      padding-inline: var(--padding-content);
+
+      &-item {
+        display: flex;
+        column-gap: rem(5);
+      }
+
+      &-key {
+        font-weight: 600;
+      }
+    }
+  }
+}

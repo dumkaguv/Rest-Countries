@@ -1,0 +1,21 @@
+@use "../helpers" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-light);
+  box-shadow: var(--shadow);
+  z-index: 100;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: rem(80);
+  }
+
+  &__link {
+    font-size: fluid(20, 28);
+    font-weight: 600;
+  }
+}

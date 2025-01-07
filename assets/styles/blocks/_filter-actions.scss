@@ -1,0 +1,58 @@
+@use "../helpers" as *;
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: rem(50);
+
+  @include mobile-m {
+    flex-direction: column;
+    align-items: start;
+    row-gap: rem(25);
+  }
+
+  &__search {
+    position: relative;
+    min-width: 40%;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+
+    @include mobile-m {
+      min-width: 100%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: rem(15);
+      translate: 50% -50%;
+      width: rem(24);
+      color: black;
+      height: rem(24);
+      background: url("../../icons/search-icon.svg") center / contain no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+
+  &__input {
+    min-height: rem(60);
+    width: 100%;
+    border: none;
+    font-size: rem(16);
+    padding: rem(10) rem(25);
+    padding-left: rem(70);
+    color: black;
+    border-radius: var(--border-radius);
+
+    @include hover {
+      background-color: var(--color-gray-light);
+    }
+
+    &::placeholder {
+      font-size: rem(16);
+    }
+  }
+}

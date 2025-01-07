@@ -1,0 +1,21 @@
+@use "../helpers" as *;
+
+.theme {
+  display: flex;
+  align-items: center;
+  column-gap: rem(10);
+
+  &__icon {
+    --size: #{rem(24)};
+
+    @include square(var(--size));
+
+    @include tablet {
+      --size: #{rem(20)};
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+  }
+}

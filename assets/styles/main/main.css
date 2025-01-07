@@ -1,0 +1,677 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+  */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+  */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+  */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+    */
+  scrollbar-gutter: stable;
+}
+
+/**
+  Плавный скролл
+  */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+  Пригодится в большинстве ситуаций
+  (когда, например, нужно будет "прижать" футер к низу сайта)
+    */
+  min-height: 100%;
+  /**
+  Унифицированный интерлиньяж
+    */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+  */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+  */
+a,
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+  */
+:where([fill]:not([fill=none], [fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+  */
+:where([stroke]:not([stroke=none], [stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+  */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+  */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("../../fonts/NunitoSans10pt-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "INunito Sansnter";
+  src: url("../../fonts/NunitoSans10pt-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("../../fonts/NunitoSans10pt-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color-light: #ffffff;
+  --color-gray-light: #fafafa;
+  --color-gray-dark: #858585;
+  --color-dark-blue: #2b3945;
+  --color-dark-blue-bg: rgb(32, 44, 55);
+  --color-dark-blue-text: #111517;
+  --font-family-base: "Nunito Sans", sans-serif;
+  --container-width: 90rem;
+  --container-padding-x: 1rem;
+  --transition-duration: 0.2s;
+  --shadow:0 0 0.625rem #a1a1a140;
+  --border-radius: clamp(0.375rem, 0.3461538462rem + 0.1282051282dvw, 0.5rem);
+  /* Scrollbar */
+  --scrollbar-width: 0.75rem;
+  --scrollbar-thumb-color: #4f4e4e;
+  --scrollbar-thumb-hover-color: #777777;
+  --scrollbar-track-color: var(--color-dark-15);
+  --scrollbar-border-radius: 0.375rem;
+  --scrollbar-thumb-border: 0.1875rem solid var(--color-dark-20);
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+          clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@media (width > 63.99875rem) {
+  .visible-tablet {
+    display: none !important;
+  }
+}
+
+@media (width <= 63.99875rem) {
+  .hidden-tablet {
+    display: none !important;
+  }
+}
+
+@media (width <= 47.99875rem) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (width > 47.99875rem) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+html.is-lock {
+  overflow: hidden;
+}
+
+body {
+  font-size: clamp(0.875rem, 0.8461538462rem + 0.1282051282dvw, 1rem);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-base);
+  color: var(--color-dark-blue-text);
+  background-color: var(--color-gray-light);
+  -webkit-tap-highlight-color: transparent;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  color: var(--color-dark-blue-text);
+  font-weight: 600;
+}
+
+h1,
+.h1 {
+  font-size: clamp(1.25rem, 1.1057692308rem + 0.641025641dvw, 1.875rem);
+}
+
+h2,
+.h2 {
+  font-size: clamp(1.125rem, 1.0961538462rem + 0.1282051282dvw, 1.25rem);
+}
+
+h3,
+.h3 {
+  font-size: clamp(1rem, 0.9711538462rem + 0.1282051282dvw, 1.125rem);
+}
+
+h4,
+.h4 {
+  font-size: clamp(0.875rem, 0.8461538462rem + 0.1282051282dvw, 1rem);
+}
+
+h5,
+.h5 {
+  font-size: clamp(0.75rem, 0.7211538462rem + 0.1282051282dvw, 0.875rem);
+}
+
+h6,
+.h6 {
+  font-size: 0.75rem;
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: inherit;
+}
+a[class] {
+  text-decoration: none;
+}
+@media (hover: hover) {
+  a:hover {
+    color: var(--color-accent);
+  }
+}
+@media (hover: none) {
+  a:active {
+    color: var(--color-accent);
+  }
+}
+
+:focus-visible {
+  transition-duration: 0s !important;
+}
+
+/* Весь скроллбар */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+/* Ползунок */
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  border: var(--scrollbar-thumb-border);
+}
+
+/* Дорожка */
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+/* Ползунок при наведении */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-light);
+  box-shadow: var(--shadow);
+  z-index: 100;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 5rem;
+}
+.header__link {
+  font-size: clamp(1.25rem, 1.1346153846rem + 0.5128205128dvw, 1.75rem);
+  font-weight: 600;
+}
+
+.theme {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.625rem;
+       column-gap: 0.625rem;
+}
+.theme__icon {
+  --size: 1.5rem;
+  width: var(--size);
+  height: var(--size);
+}
+@media (width <= 63.99875rem) {
+  .theme__icon {
+    --size: 1.25rem;
+  }
+}
+.theme__text {
+  font-weight: 500;
+}
+
+.section {
+  display: grid;
+  padding-block: clamp(1.5625rem, 1.0576923077rem + 2.2435897436dvw, 3.75rem);
+}
+
+.countries {
+  --padding-content: 1.5625rem;
+}
+.countries__link {
+  width: 100%;
+}
+@media (hover: hover) {
+  .countries__link:hover {
+    scale: 1.03;
+  }
+}
+@media (hover: none) {
+  .countries__link:active {
+    scale: 1.03;
+  }
+}
+.countries__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5rem;
+}
+@media (width <= 90.06125rem) {
+  .countries__list {
+    gap: 3.125rem;
+  }
+}
+@media (width <= 79.99875rem) {
+  .countries__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.1875rem;
+  }
+}
+@media (width <= 63.99875rem) {
+  .countries__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (width <= 30.06125rem) {
+  .countries__list {
+    grid-template-columns: 1fr;
+  }
+}
+.countries__item {
+  display: flex;
+  align-items: stretch;
+  min-width: 100%;
+}
+@media (width <= 30.06125rem) {
+  .countries__item {
+    margin-inline: auto;
+  }
+}
+.countries__card {
+  background-color: var(--color-light);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  padding-bottom: clamp(1.25rem, 0.9615384615rem + 1.2820512821dvw, 2.5rem);
+  height: 100%;
+  width: 100%;
+}
+@media (hover: hover) {
+  .countries__card:hover {
+    background-color: var(--color-gray-light);
+  }
+}
+@media (hover: none) {
+  .countries__card:active {
+    background-color: var(--color-gray-light);
+  }
+}
+.countries__card-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: clamp(9.375rem, 8.6538461538rem + 3.2051282051dvw, 12.5rem);
+  max-width: clamp(15.625rem, 14.9038461538rem + 3.2051282051dvw, 18.75rem);
+  min-width: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+.countries__card-title {
+  margin-block: clamp(0.9375rem, 0.7932692308rem + 0.641025641dvw, 1.5625rem);
+  padding-inline: var(--padding-content);
+}
+.countries__card-info {
+  display: grid;
+  row-gap: 0.3125rem;
+  padding-inline: var(--padding-content);
+}
+.countries__card-info-item {
+  display: flex;
+  -moz-column-gap: 0.3125rem;
+       column-gap: 0.3125rem;
+}
+.countries__card-info-key {
+  font-weight: 600;
+}
+
+.custom-select {
+  position: relative;
+  cursor: pointer;
+}
+.custom-select.is-expanded .custom-select__options {
+  scale: 1;
+  opacity: 1;
+  visibility: visible;
+}
+.custom-select.is-expanded .custom-select__title::after {
+  rotate: 180deg;
+}
+.custom-select__title {
+  display: flex;
+  justify-content: space-between;
+  -moz-column-gap: 0.9375rem;
+       column-gap: 0.9375rem;
+  padding: 1.25rem;
+  background-color: var(--color-light);
+  font-size: 1rem;
+  min-width: 12.5rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-duration);
+}
+@media (hover: hover) {
+  .custom-select__title:hover {
+    background-color: var(--color-gray-light);
+  }
+}
+@media (hover: none) {
+  .custom-select__title:active {
+    background-color: var(--color-gray-light);
+  }
+}
+.custom-select__title::after {
+  content: "";
+  transition: rotate var(--transition-duration);
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url("../../icons/arrow-down-icon.svg") center/contain no-repeat;
+}
+.custom-select__options {
+  display: grid;
+  position: absolute;
+  top: calc(100% + 0.3125rem);
+  left: 0;
+  font-weight: 500;
+  font-size: 1rem;
+  width: 100%;
+  row-gap: 0.625rem;
+  background-color: var(--color-light);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 0.625rem;
+  border-radius: var(--border-radius);
+  z-index: 10;
+  scale: 0;
+  transform-origin: top;
+  transition-duration: var(--transition-duration);
+  opacity: 0;
+  visibility: hidden;
+}
+.custom-select__option {
+  padding-inline: 0.625rem;
+}
+@media (hover: hover) {
+  .custom-select__option:hover {
+    background-color: rgb(219, 217, 217);
+  }
+}
+@media (hover: none) {
+  .custom-select__option:active {
+    background-color: rgb(219, 217, 217);
+  }
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3.125rem;
+}
+@media (width <= 40.06125rem) {
+  .filter-actions {
+    flex-direction: column;
+    align-items: start;
+    row-gap: 1.5625rem;
+  }
+}
+.filter-actions__search {
+  position: relative;
+  min-width: 40%;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+}
+@media (width <= 40.06125rem) {
+  .filter-actions__search {
+    min-width: 100%;
+  }
+}
+.filter-actions__search::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.9375rem;
+  translate: 50% -50%;
+  width: 1.5rem;
+  color: black;
+  height: 1.5rem;
+  background: url("../../icons/search-icon.svg") center/contain no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+.filter-actions__input {
+  min-height: 3.75rem;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding: 0.625rem 1.5625rem;
+  padding-left: 4.375rem;
+  color: black;
+  border-radius: var(--border-radius);
+}
+@media (hover: hover) {
+  .filter-actions__input:hover {
+    background-color: var(--color-gray-light);
+  }
+}
+@media (hover: none) {
+  .filter-actions__input:active {
+    background-color: var(--color-gray-light);
+  }
+}
+.filter-actions__input::-moz-placeholder {
+  font-size: 1rem;
+}
+.filter-actions__input::placeholder {
+  font-size: 1rem;
+}/*# sourceMappingURL=main.css.map */

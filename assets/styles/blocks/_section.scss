@@ -1,0 +1,6 @@
+@use "../helpers" as *;
+
+.section {
+  display: grid;
+  padding-block: fluid(25, 60);
+}

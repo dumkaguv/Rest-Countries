@@ -1,0 +1,30 @@
+@use "../helpers" as *;
+
+:root {
+  --color-light: #ffffff;
+
+  --color-gray-light: #fafafa;
+  --color-gray-dark: #858585;
+
+  --color-dark-blue: #2b3945;
+  --color-dark-blue-bg: rgb(32, 44, 55);
+  --color-dark-blue-text: #111517;
+
+  --font-family-base: "Nunito Sans", sans-serif;
+
+  --container-width: #{rem(1440)};
+  --container-padding-x: #{rem(16)};
+
+  --transition-duration: 0.2s;
+
+  --shadow:0 0 #{rem(10)} #a1a1a140;
+  --border-radius: #{fluid(6, 8)};
+
+  /* Scrollbar */
+  --scrollbar-width: #{rem(12)};
+  --scrollbar-thumb-color: #4f4e4e;
+  --scrollbar-thumb-hover-color: #777777;
+  --scrollbar-track-color: var(--color-dark-15);
+  --scrollbar-border-radius: #{rem(6)};
+  --scrollbar-thumb-border: #{rem(3)} solid var(--color-dark-20);
+}
