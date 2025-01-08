@@ -10,8 +10,11 @@
     <title>Rest Countries</title>
 
     <link rel="stylesheet" href="./assets/styles/main/main.css" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js" defer></script>
-    <script src="./assets/scripts/main.js" type="module"></script>
+    <script
+      src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"
+      defer
+    ></script>
+    <script src="./assets/scripts/pageDetails.js" type="module"></script>
   </head>
   <body>
     <!-- Header -->
@@ -54,52 +57,7 @@
       </div>
     </header>
     <main class="content">
-      <section class="section container">
-        <div class="filter-actions">
-          <label class="visually-hidden" for="search-input">Поиск:</label>
-          <div class="filter-actions__search">
-            <input
-              type="search"
-              class="filter-actions__input"
-              id="search-input"
-              name="query"
-              placeholder="Search for a country..."
-              data-js-search-input
-            />
-          </div>
-          <div role="form" aria-labelledby="filter-section">
-            <span class="visually-hidden" id="filter-section"
-              >Filters</span
-            >
-            <div
-              class="custom-select"
-              role="combobox"
-              aria-owns="custom-options"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              id="custom-filter"
-              data-js-custom-selector
-            >
-              <div class="custom-select__title">
-                <span data-js-custom-select-title>Filter by Region</span>
-              </div>
-              <ul
-                class="custom-select__options"
-                id="custom-options"
-                role="listbox"
-                data-js-custom-select-options
-              >
-              
-              </ul>
-            </div>
-          </div>
-        </div>
 
-        <div class="countries">
-          <ul class="countries__list" data-js-countries-list>
-          </ul>
-        </div>
-      </section>
     </main>
   </body>
 </html>

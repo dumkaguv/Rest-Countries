@@ -1,5 +1,12 @@
 @use "../helpers" as *;
 
+html[data-theme="dark"] {
+  .custom-select__title::after {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+      saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+  }
+}
+
 .custom-select {
   position: relative;
   cursor: pointer;
@@ -39,7 +46,10 @@
       transition: rotate var(--transition-duration);
       width: rem(24);
       height: rem(24);
-      background: url("../../icons/arrow-down-icon.svg") center / contain no-repeat;
+      filter: brightness(0) saturate(100%) invert(0%) sepia(85%)
+        saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
+      background: url("../../icons/arrow-down-icon.svg") center / contain
+        no-repeat;
     }
   }
 
@@ -69,7 +79,7 @@
     padding-inline: rem(10);
 
     @include hover {
-      background-color: rgb(219, 217, 217);
+      background-color: var(--color-gray-light);
     }
   }
 }

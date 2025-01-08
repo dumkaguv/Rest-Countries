@@ -4,16 +4,13 @@ class Search {
   constructor(rootElement, countries) {
     this.rootElement = rootElement;
     this.countries = countries;
+    this.searchQuery = "";
     this.bindEvents();
   }
 
   onInputChange = () => {
-    const textInput = this.rootElement.value.trim().toLowerCase();
-    this.countries.renderCountries({
-      name: textInput,
-      capital: textInput,
-      population: textInput,
-    });
+    const searchQuery = this.rootElement.value.trim().toLowerCase();
+    this.countries.updateSearchQuery(searchQuery);
   };
 
   bindEvents() {

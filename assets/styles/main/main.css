@@ -544,6 +544,10 @@ a[class] {
   font-weight: 600;
 }
 
+html[data-theme=dark] .custom-select__title::after {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+}
+
 .custom-select {
   position: relative;
   cursor: pointer;
@@ -585,6 +589,7 @@ a[class] {
   transition: rotate var(--transition-duration);
   width: 1.5rem;
   height: 1.5rem;
+  filter: brightness(0) saturate(100%) invert(0%) sepia(85%) saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
   background: url("../../icons/arrow-down-icon.svg") center/contain no-repeat;
 }
 .custom-select__options {
@@ -612,12 +617,12 @@ a[class] {
 }
 @media (hover: hover) {
   .custom-select__option:hover {
-    background-color: rgb(219, 217, 217);
+    background-color: var(--color-gray-light);
   }
 }
 @media (hover: none) {
   .custom-select__option:active {
-    background-color: rgb(219, 217, 217);
+    background-color: var(--color-gray-light);
   }
 }
 
@@ -652,7 +657,7 @@ a[class] {
   left: 0.9375rem;
   translate: 50% -50%;
   width: 1.5rem;
-  color: black;
+  color: var(--color-dark-blue-text);
   height: 1.5rem;
   background: url("../../icons/search-icon.svg") center/contain no-repeat;
   z-index: 1;
@@ -665,7 +670,7 @@ a[class] {
   font-size: 1rem;
   padding: 0.625rem 1.5625rem;
   padding-left: 4.375rem;
-  color: black;
+  color: var(--color-dark-blue-text);
   border-radius: var(--border-radius);
   background-color: var(--color-light);
 }

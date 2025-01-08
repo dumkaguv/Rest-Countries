@@ -6,6 +6,14 @@ class Countries {
     this.init();
   }
 
+  get data() {
+    return this._data;
+  }
+
+  set data(value) {
+    this._data = value;
+  }
+
   async init() {
     this.data = await this.getData();
     this.renderCountries();
@@ -30,23 +38,28 @@ class Countries {
     }
   }
 
-  renderCountries = (searchParams = {}) => {
+  filterData = (searchParams = {}) => {
     const filteredData = this.data.slice(0, 30).filter((item) => {
       if (Object.values(searchParams).every((value) => !value)) {
         return true;
       }
 
-      return Object.entries(searchParams).some(([key, value]) => {
-        return (
-          value &&
-          item[key]
-            ?.toString()
-            .trim()
-            .toLowerCase()
-            .includes(value.trim().toLowerCase())
-        );
+      return Object.entries(searchParams).every(([key, value]) => {
+        if (!value) return true;
+
+        return item[key]
+          ?.toString()
+          .trim()
+          .toLowerCase()
+          .includes(value.trim().toLowerCase());
       });
     });
+
+    return filteredData || {};
+  };
+
+  renderCountries = (searchParams = {}) => {
+    const filteredData = this.filterData(searchParams);
 
     const countriesHTML = filteredData
       .map(({ name, population, region, capital, flags }) =>
@@ -69,7 +82,7 @@ class Countries {
     region = "N/A",
     capital = "N/A",
     srcImage,
-    link = "#"
+    link = "./details.html"
   ) {
     return `
       <li class="countries__item">
