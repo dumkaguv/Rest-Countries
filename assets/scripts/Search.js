@@ -12,7 +12,6 @@ class Search {
     this.countries.renderCountries({
       name: textInput,
       capital: textInput,
-      region: textInput,
       population: textInput,
     });
   };

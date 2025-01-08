@@ -39,7 +39,11 @@ class Countries {
       return Object.entries(searchParams).some(([key, value]) => {
         return (
           value &&
-          item[key]?.toString().trim().toLowerCase().includes(value.trim().toLowerCase())
+          item[key]
+            ?.toString()
+            .trim()
+            .toLowerCase()
+            .includes(value.trim().toLowerCase())
         );
       });
     });

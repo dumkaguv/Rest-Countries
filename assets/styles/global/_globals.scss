@@ -6,6 +6,12 @@ html {
   }
 }
 
+[data-theme="dark"] {
+  --color-dark-blue-text: #fff;
+  --color-light: var(--color-dark-blue-bg);
+  --color-gray-light: var(--color-dark-blue);
+}
+
 body {
   font-size: fluid(14, 16);
 
@@ -17,6 +23,9 @@ body {
   background-color: var(--color-gray-light);
 
   -webkit-tap-highlight-color: transparent;
+
+  transition: background-color var(--transition-duration) ease,
+    color var(--transition-duration) ease;
 }
 
 main {

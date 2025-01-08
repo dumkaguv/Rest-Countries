@@ -46,6 +46,7 @@
     padding-left: rem(70);
     color: black;
     border-radius: var(--border-radius);
+    background-color: var(--color-light);
 
     @include hover {
       background-color: var(--color-gray-light);
@@ -53,6 +54,7 @@
 
     &::placeholder {
       font-size: rem(16);
+      color: var(--color-dark-blue-text);
     }
   }
 }

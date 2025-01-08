@@ -214,8 +214,8 @@ svg * {
   --color-light: #ffffff;
   --color-gray-light: #fafafa;
   --color-gray-dark: #858585;
+  --color-dark-blue-bg: #202c37;
   --color-dark-blue: #2b3945;
-  --color-dark-blue-bg: rgb(32, 44, 55);
   --color-dark-blue-text: #111517;
   --font-family-base: "Nunito Sans", sans-serif;
   --container-width: 90rem;
@@ -280,6 +280,12 @@ html.is-lock {
   overflow: hidden;
 }
 
+[data-theme=dark] {
+  --color-dark-blue-text: #fff;
+  --color-light: var(--color-dark-blue-bg);
+  --color-gray-light: var(--color-dark-blue);
+}
+
 body {
   font-size: clamp(0.875rem, 0.8461538462rem + 0.1282051282dvw, 1rem);
   display: flex;
@@ -288,6 +294,7 @@ body {
   color: var(--color-dark-blue-text);
   background-color: var(--color-gray-light);
   -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
 
 main {
