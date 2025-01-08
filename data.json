@@ -1,7 +1,7 @@
 [
   {
     "name": "Afghanistan",
-    "topLevelDomain": [".af"],
+    "topLevelDomain": [".af", ".au"],
     "alpha2Code": "AF",
     "alpha3Code": "AFG",
     "callingCodes": ["93"],

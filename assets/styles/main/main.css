@@ -221,8 +221,12 @@ svg * {
   --container-width: 90rem;
   --container-padding-x: 1rem;
   --transition-duration: 0.2s;
-  --shadow:0 0 0.625rem #a1a1a140;
+  --shadow: 0 0 0.625rem #a1a1a140;
   --border-radius: clamp(0.375rem, 0.3461538462rem + 0.1282051282dvw, 0.5rem);
+  --filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+  --filter-black: brightness(0) saturate(100%) invert(0%) sepia(85%)
+    saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
   /* Scrollbar */
   --scrollbar-width: 0.75rem;
   --scrollbar-thumb-color: #4f4e4e;
@@ -295,6 +299,12 @@ body {
   background-color: var(--color-gray-light);
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+  visibility: hidden;
+}
+
+.theme-loaded body {
+  visibility: visible;
+  transition: visibility 0s linear 0.1s;
 }
 
 main {
@@ -545,7 +555,7 @@ a[class] {
 }
 
 html[data-theme=dark] .custom-select__title::after {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+  filter: var(--filter-white);
 }
 
 .custom-select {
@@ -589,7 +599,7 @@ html[data-theme=dark] .custom-select__title::after {
   transition: rotate var(--transition-duration);
   width: 1.5rem;
   height: 1.5rem;
-  filter: brightness(0) saturate(100%) invert(0%) sepia(85%) saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
+  filter: var(--filter-black);
   background: url("../../icons/arrow-down-icon.svg") center/contain no-repeat;
 }
 .custom-select__options {
@@ -626,6 +636,10 @@ html[data-theme=dark] .custom-select__title::after {
   }
 }
 
+html[data-theme=dark] .filter-actions__search::after {
+  filter: var(--filter-white);
+}
+
 .filter-actions {
   display: flex;
   justify-content: space-between;
@@ -658,6 +672,7 @@ html[data-theme=dark] .custom-select__title::after {
   translate: 50% -50%;
   width: 1.5rem;
   color: var(--color-dark-blue-text);
+  filter: var(--filter-black);
   height: 1.5rem;
   background: url("../../icons/search-icon.svg") center/contain no-repeat;
   z-index: 1;
@@ -691,4 +706,162 @@ html[data-theme=dark] .custom-select__title::after {
 .filter-actions__input::placeholder {
   font-size: 1rem;
   color: var(--color-dark-blue-text);
+}
+
+html[data-theme=dark] .button--back::before {
+  filter: var(--filter-white);
+}
+
+.button {
+  display: flex;
+  -moz-column-gap: 0.9375rem;
+       column-gap: 0.9375rem;
+  align-items: center;
+  color: var(--color-dark-blue-text);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--color-light);
+  padding: 0.625rem 1.25rem;
+  min-width: 8.125rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .button:hover {
+    background-color: var(--color-gray-light);
+  }
+}
+@media (hover: none) {
+  .button:active {
+    background-color: var(--color-gray-light);
+  }
+}
+.button--back::before {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  content: "";
+  filter: var(--filter-black);
+  background: url("../../icons/arrow-left-icon.svg") no-repeat center center;
+}
+
+.page-details {
+  padding-block: clamp(2.5rem, 1.9230769231rem + 2.5641025641dvw, 5rem);
+  display: grid;
+  row-gap: clamp(3.75rem, 3.4615384615rem + 1.2820512821dvw, 5rem);
+  align-items: center;
+}
+.page-details__body {
+  display: grid;
+  grid-template-columns: clamp(18.75rem, 14.4230769231rem + 19.2307692308dvw, 37.5rem) 1fr;
+  -moz-column-gap: clamp(4.375rem, 3.6538461538rem + 3.2051282051dvw, 7.5rem);
+       column-gap: clamp(4.375rem, 3.6538461538rem + 3.2051282051dvw, 7.5rem);
+}
+@media (width <= 47.99875rem) {
+  .page-details__body {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+}
+.page-details__image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+@media (width <= 63.99875rem) {
+  .page-details__image {
+    align-self: center;
+    height: 60%;
+  }
+}
+@media (width <= 47.99875rem) {
+  .page-details__image {
+    width: 60%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+@media (width <= 40.06125rem) {
+  .page-details__image {
+    width: 100%;
+  }
+}
+.page-details__info {
+  display: grid;
+  row-gap: 1.875rem;
+}
+.page-details__title {
+  font-size: clamp(1.5rem, 1.3269230769rem + 0.7692307692dvw, 2.25rem);
+  align-self: end;
+}
+.page-details__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.3125rem;
+}
+@media (width <= 63.99875rem) {
+  .page-details__list {
+    grid-template-columns: 1fr;
+  }
+}
+.page-details__item {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 0.3125rem;
+       column-gap: 0.3125rem;
+}
+.page-details__key {
+  font-weight: 600;
+}
+.page-details__border {
+  display: flex;
+  -moz-column-gap: 0.9375rem;
+       column-gap: 0.9375rem;
+  align-items: center;
+}
+@media (width <= 63.99875rem) {
+  .page-details__border {
+    flex-direction: column;
+    align-items: start;
+    row-gap: 0.625rem;
+  }
+}
+.page-details__border-title {
+  font-weight: 600;
+}
+.page-details__border-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+.page-details__border-item {
+  display: flex;
+  -moz-column-gap: 0.9375rem;
+       column-gap: 0.9375rem;
+  align-items: center;
+  color: var(--color-dark-blue-text);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--color-light);
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .page-details__border-item:hover {
+    background-color: var(--color-gray-light);
+  }
+}
+@media (hover: none) {
+  .page-details__border-item:active {
+    background-color: var(--color-gray-light);
+  }
+}
+.page-details__border-link {
+  padding: 0.625rem 1.875rem;
 }/*# sourceMappingURL=main.css.map */

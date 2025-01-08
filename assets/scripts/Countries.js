@@ -3,8 +3,13 @@ class Countries {
 
   constructor() {
     this.rootElement = document.querySelector(this.rootSelector);
+    this._data = [];
     this.init();
   }
+
+  saveData = (data) => {
+    localStorage.setItem('countriesData', JSON.stringify(data));
+  };
 
   get data() {
     return this._data;
@@ -16,6 +21,12 @@ class Countries {
 
   async init() {
     this.data = await this.getData();
+
+    if (!this.isDataInitialized) {
+      this.isDataInitialized = true;
+    }
+
+    this.saveData(this.data)
     this.renderCountries();
   }
 
@@ -39,7 +50,7 @@ class Countries {
   }
 
   filterData = (searchParams = {}) => {
-    const filteredData = this.data.slice(0, 30).filter((item) => {
+    const filteredData = this.data.filter((item) => {
       if (Object.values(searchParams).every((value) => !value)) {
         return true;
       }
@@ -55,25 +66,27 @@ class Countries {
       });
     });
 
-    return filteredData || {};
+    return filteredData || [];
   };
 
   renderCountries = (searchParams = {}) => {
     const filteredData = this.filterData(searchParams);
-
     const countriesHTML = filteredData
-      .map(({ name, population, region, capital, flags }) =>
+      .map(({ name, population, region, capital, flags, alpha2Code }) =>
         this.countryTemplateHTML(
           name,
           numeral(population).format("0,0"),
           region,
           capital,
-          flags.svg
+          flags.svg,
+          `./details.html?id=${alpha2Code}`
         )
       )
       .join("");
 
-    this.rootElement.innerHTML = countriesHTML;
+    if (this.rootElement) {
+      this.rootElement.innerHTML = countriesHTML;
+    }
   };
 
   countryTemplateHTML(
@@ -82,7 +95,7 @@ class Countries {
     region = "N/A",
     capital = "N/A",
     srcImage,
-    link = "./details.html"
+    link = "./"
   ) {
     return `
       <li class="countries__item">
@@ -95,7 +108,7 @@ class Countries {
               src="${srcImage}"
               alt="${country}"
             />
-            <h2 class="countries__card-title" data-js-country-title="${country}">${country}</h2>
+            <h2 class="countries__card-title">${country}</h2>
             <dl class="countries__card-info">
               <div class="countries__card-info-item">
                 <dt class="countries__card-info-key">Population:</dt>

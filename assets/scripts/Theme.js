@@ -15,19 +15,23 @@ class Theme {
     lightMode: "Light Mode",
   };
 
+  stateClasses = {
+    themeLoaded: "theme-loaded",
+  }
+
   dataAttribute = "data-theme";
 
   localStorageValue = "theme";
 
   constructor() {
+    this.restorePreference();
+    document.documentElement.classList.add(this.stateClasses.themeLoaded);
+
     this.rootElement = document.querySelector(this.selectors.root);
     this.iconElement = document.querySelector(this.selectors.icon);
     this.textElement = document.querySelector(this.selectors.text);
+    this.currentTheme = document.documentElement.getAttribute(this.dataAttribute);
 
-    this.restorePreference();
-    this.currentTheme = document.documentElement.getAttribute(
-      this.dataAttribute
-    );
     this.changeThemeButtonContent();
     this.bindEvents();
   }
@@ -111,5 +115,5 @@ class Theme {
     }
   };
 }
-
+  
 export default Theme;

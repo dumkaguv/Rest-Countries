@@ -1,5 +1,11 @@
 @use "../helpers" as *;
 
+html[data-theme="dark"] {
+  .filter-actions__search::after {
+    filter: var(--filter-white);
+  }
+}
+
 .filter-actions {
   display: flex;
   justify-content: space-between;
@@ -30,6 +36,7 @@
       translate: 50% -50%;
       width: rem(24);
       color: var(--color-dark-blue-text);
+      filter: var(--filter-black);
       height: rem(24);
       background: url("../../icons/search-icon.svg") center / contain no-repeat;
       z-index: 1;

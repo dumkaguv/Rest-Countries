@@ -1,0 +1,36 @@
+@use "../helpers" as *;
+
+html[data-theme="dark"] {
+  .button--back::before {
+    filter: var(--filter-white);
+  }
+}
+
+.button {
+  display: flex;
+  column-gap: rem(15);
+  align-items: center;
+  color: var(--color-dark-blue-text);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--color-light);
+  padding: rem(10) rem(20);
+  min-width: rem(130);
+  width: fit-content;
+
+  cursor: pointer;
+
+  @include hover {
+    background-color: var(--color-gray-light);
+  }
+
+  &--back::before {
+    --size: #{rem(32)};
+
+    @include square(var(--size));
+
+    content: "";
+    filter: var(--filter-black);
+    background: url("../../icons/arrow-left-icon.svg") no-repeat center center;
+  }
+}

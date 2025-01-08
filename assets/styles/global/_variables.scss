@@ -16,8 +16,13 @@
 
   --transition-duration: 0.2s;
 
-  --shadow:0 0 #{rem(10)} #a1a1a140;
+  --shadow: 0 0 #{rem(10)} #a1a1a140;
   --border-radius: #{fluid(6, 8)};
+
+  --filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+  --filter-black: brightness(0) saturate(100%) invert(0%) sepia(85%)
+    saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
 
   /* Scrollbar */
   --scrollbar-width: #{rem(12)};

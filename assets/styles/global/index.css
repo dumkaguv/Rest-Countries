@@ -221,8 +221,12 @@ svg * {
   --container-width: 90rem;
   --container-padding-x: 1rem;
   --transition-duration: 0.2s;
-  --shadow:0 0 0.625rem #a1a1a140;
+  --shadow: 0 0 0.625rem #a1a1a140;
   --border-radius: clamp(0.375rem, 0.3461538462rem + 0.1282051282dvw, 0.5rem);
+  --filter-white: brightness(0) saturate(100%) invert(100%) sepia(0%)
+    saturate(0%) hue-rotate(67deg) brightness(104%) contrast(104%);
+  --filter-black: brightness(0) saturate(100%) invert(0%) sepia(85%)
+    saturate(7500%) hue-rotate(266deg) brightness(89%) contrast(114%);
   /* Scrollbar */
   --scrollbar-width: 0.75rem;
   --scrollbar-thumb-color: #4f4e4e;
@@ -295,6 +299,12 @@ body {
   background-color: var(--color-gray-light);
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+  visibility: hidden;
+}
+
+.theme-loaded body {
+  visibility: visible;
+  transition: visibility 0s linear 0.1s;
 }
 
 main {

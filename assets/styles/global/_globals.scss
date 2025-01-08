@@ -26,6 +26,13 @@ body {
 
   transition: background-color var(--transition-duration) ease,
     color var(--transition-duration) ease;
+
+  visibility: hidden;
+}
+
+.theme-loaded body {
+  visibility: visible;
+  transition: visibility 0s linear 0.1s;
 }
 
 main {
