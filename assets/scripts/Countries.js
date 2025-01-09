@@ -62,7 +62,7 @@ class Countries {
           ?.toString()
           .trim()
           .toLowerCase()
-          .includes(value.trim().toLowerCase());
+          .startsWith(value.trim().toLowerCase());
       });
     });
 

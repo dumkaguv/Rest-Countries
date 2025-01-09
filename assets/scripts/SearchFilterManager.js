@@ -20,11 +20,6 @@ class SearchManagerFilter {
   }
 
   renderCountries() {
-    console.log("Rendering with:", {
-      name: this.searchQuery,
-      region: this.filteredOption,
-    });
-
     this.countries.renderCountries({
       name: this.searchQuery,
       region: this.filteredOption,
