@@ -36,7 +36,7 @@ class Countries {
 
       if (response.status === 404) {
         console.error("Ошибка при загрузке данных 404");
-        return {};
+        return [];
       }
 
       const data = await response.json();
@@ -45,7 +45,7 @@ class Countries {
     } catch (error) {
       console.error("Ошибка при загрузке данных:", error);
 
-      return {};
+      return [];
     }
   }
 

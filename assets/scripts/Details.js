@@ -97,7 +97,7 @@ class Details {
     country = "",
     nativeName = "",
     population = "",
-    region = "",
+    region = "",  
     subregion = "",
     capital = "",
     levelDomain = [],
